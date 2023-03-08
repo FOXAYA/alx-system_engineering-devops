@@ -1,6 +1,3 @@
-select C-x C-s in ; do
-    $C-x C-s
-done
-
 #!/bin/bash
 pwd
+0-current_working_directory
