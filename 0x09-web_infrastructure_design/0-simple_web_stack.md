@@ -1,4 +1,4 @@
-https://github.com/FOXAYA/alx-system_engineering-devops/issues/1#issue-2151010885
+![Alt text] (https://drive.google.com/file/d/1xFP-qWicKTXs4ayELHAki7s9DGEfQA0k/view?usp=sharing)
 
 #Description
 - This is a simple web infrastructure that hosts a website that is reachable via www.foobar.com
