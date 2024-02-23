@@ -1,3 +1,7 @@
+
+![drawio](https://github.com/FOXAYA/alx-system_engineering-devops/assets/75582176/af5d0fa3-868b-4559-aeb0-56db798f58e9)
+
+
 ![Alt text] (https://drive.google.com/file/d/1xFP-qWicKTXs4ayELHAki7s9DGEfQA0k/view?usp=sharing)
 
 #Description
