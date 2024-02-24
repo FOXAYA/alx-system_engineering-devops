@@ -1,3 +1,6 @@
+
+![2-secured_and_monitored_web_infrastructure](https://github.com/FOXAYA/alx-system_engineering-devops/assets/75582176/527e59a0-788c-4772-a726-bd53137d9167)
+
 # Description
 - This is a 3-server web infrastructure that is secured, monitored, and serves encrypted traffic.
 
