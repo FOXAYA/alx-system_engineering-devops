@@ -8,20 +8,20 @@ global
     ssl-default-bind-options no-sslv3 no-tlsv10 no-tlsv11 no-tls-tickets
 
 defaults
-    mode http
-    timeout connect 5s
-    timeout client 50s
-    timeout server 50s
+  mode http
+  timeout client 15s
+  timeout connect 10s
+  timeout server 15s
+  timeout http-request 10s
 
-frontend https
+frontend my-frontend
+    bind *:80
+    redirect scheme https code 301 if !{ ssl_fc }
+    default_backend my-backend
 
-    bind *:443 ssl crt /etc/haproxy/certs/www.omniasaged111.tech.pem
-  
-    default_backend backend_servers
-
-backend backend_servers
+backend my-backend
     balance roundrobin
-    option httpchk GET / HTTP/1.1\r\nHost:\ www.omniadaged111.tech
     server 377364-web-01 54.162.53.25:80:80 check
     server 377364-web-02 18.207.112.223:80 check
+
 sudo service haproxy restart
