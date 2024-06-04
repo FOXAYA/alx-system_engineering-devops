@@ -5,23 +5,33 @@ number of subscribers for a given subreddit
 import requests
 
 def number_of_subscribers(subreddit):
-    url = f'https://www.reddit.com/r/{subreddit}/about.json'
-    response = requests.get(url)
+    # Define the base URL for the Reddit API endpoint
+    url = f"https://www.reddit.com/r/{subreddit}/about.json"
 
-    # Check if the response has content and is JSON
-    if response.status_code == 200 and response.headers['content-type'] == 'application/json':
-        try:
+    # Set up headers including a custom User-Agent to avoid Too Many Requests errors
+    headers = {
+        "User-Agent": "Custom User Agent"
+    }
+
+    try:
+        # Make a GET request to the Reddit API
+        response = requests.get(url, headers=headers)
+
+        # Check if the request was successful
+        if response.status_code == 200:
+            # Parse the JSON response
             data = response.json()
-            subscribers = data.get('data', {}).get('subscribers')
-            if subscribers is not None:
-                return subscribers
-            else:
-                print(f"No subscriber count found for subreddit: {subreddit}")
-                return None
-        except ValueError:
-            print(f"Invalid JSON response: {response.content}")
-            return None
-    else:
-        print(f"Request failed with status code: {response.status_code}, content type: {response.headers['content-type']}")
-        return None
+
+            # Extract the subscriber count from the parsed JSON
+            subscriber_count = data['data']['subscribers']
+
+            # Return the subscriber count
+            return subscriber_count
+        else:
+            # If the request was not successful, return 0
+            return 0
+    except Exception as e:
+        # Handle any exceptions that occur during the request
+        print(f"An error occurred: {e}")
+        return 0
 
