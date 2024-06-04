@@ -2,26 +2,26 @@
 """
 number of subscribers for a given subreddit
 """
-
-from requests import get
-
+import requests
 
 def number_of_subscribers(subreddit):
-    """
-    function that queries the Reddit API and returns the number of subscribers
-    (not active users, total subscribers) for a given subreddit.
-    """
+    url = f'https://www.reddit.com/r/{subreddit}/about.json'
+    response = requests.get(url)
 
-    if subreddit is None or not isinstance(subreddit, str):
-        return 0
+    # Check if the response has content and is JSON
+    if response.status_code == 200 and response.headers['content-type'] == 'application/json':
+        try:
+            data = response.json()
+            subscribers = data.get('data', {}).get('subscribers')
+            if subscribers is not None:
+                return subscribers
+            else:
+                print(f"No subscriber count found for subreddit: {subreddit}")
+                return None
+        except ValueError:
+            print(f"Invalid JSON response: {response.content}")
+            return None
+    else:
+        print(f"Request failed with status code: {response.status_code}, content type: {response.headers['content-type']}")
+        return None
 
-    user_agent = {'User-agent': 'Google Chrome Version 81.0.4044.129'}
-    url = 'https://www.reddit.com/r/{}/about.json'.format(subreddit)
-    response = get(url, headers=user_agent)
-    results = response.json()
-
-    try:
-        return results.get('data').get('subscribers')
-
-    except Exception:
-        return 0
